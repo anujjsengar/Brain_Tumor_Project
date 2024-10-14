@@ -1,5 +1,5 @@
 Flask
 numpy
 opencv-python
-pickle
+keras
 gunicorn
