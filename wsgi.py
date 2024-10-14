@@ -1,4 +1,4 @@
-from app import app
-from app import socketio
+from app import app, socketio  # Import the app and socketio instance
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, debug=True)  # Use socketio.run to start the server
