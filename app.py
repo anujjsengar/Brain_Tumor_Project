@@ -5,8 +5,6 @@ import pickle
 
 app = Flask(__name__)
 
-"""MODEL_FILE_ID = '18bCuM7lYM4fpD4R10RSPI_s3jKpT6md2'
-MODEL_FILE_NAME = 'my_model.keras'"""
 
 with open('example_model.pkl', 'rb') as file:
     model = pickle.load(file)
