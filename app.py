@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import numpy as np
 import cv2
-import tensorlow as tf
+import tensorflow as tf
 import pickle
 app = Flask(__name__)
 
