@@ -4,24 +4,8 @@ import cv2
 import pickle
 app = Flask(__name__)
 
-MODEL_FILE_ID = '18bCuM7lYM4fpD4R10RSPI_s3jKpT6md2'
-MODEL_FILE_NAME = 'my_model.keras'
-
 with open('example_model.pkl', 'rb') as file:
     model = pickle.load(file)
-"""def download_model():
-    url = f'https://drive.google.com/uc?export=download&id={MODEL_FILE_ID}'
-    response = requests.get(url, stream=True)
-    
-    if response.status_code == 200:
-        with open(MODEL_FILE_NAME, 'wb') as f:
-            f.write(response.content)
-    else:
-        raise Exception('Failed to download model')
-
-if not os.path.exists(MODEL_FILE_NAME):
-    download_model()
-model = tf.keras.models.load_model('my_model.keras')"""
 @app.route('/')
 def index():
     return render_template('index.html')
