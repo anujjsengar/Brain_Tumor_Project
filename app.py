@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, redirect
 import numpy as np
 import cv2
 import pickle
-import keras
 
 app = Flask(__name__)
 
 
+import dill
+
 with open('example_model.pkl', 'rb') as file:
-    model = pickle.load(file)
+    model = dill.load(file)
 
 @app.route('/')
 def index():
