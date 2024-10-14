@@ -1,13 +1,12 @@
 from flask import Flask, render_template, request, redirect
 import numpy as np
 import cv2
-import pickle
+import dill
 import tensorflow as tf
+
 app = Flask(__name__)
 
-
-import dill
-
+# Load the model
 with open('example_model.pkl', 'rb') as file:
     model = dill.load(file)
 
@@ -40,13 +39,13 @@ def predict():
     # Make predictions
     predictions = model.predict(image_array)
     predicted_class = np.argmax(predictions)
-    status="Positive"
-    if(predicted_class==2):
-        status="Negative"
+    status = "Positive" if predicted_class != 2 else "Negative"
+
     # Define your class labels
     class_labels = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
     predicted_label = class_labels[predicted_class]
-    return render_template('result.html',status=status,label=predicted_label)
+    
+    return render_template('result.html', status=status, label=predicted_label)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)  # Optional: specify host and port
