@@ -2,4 +2,3 @@ Flask
 numpy
 opencv-python
 gunicorn
-pickle
