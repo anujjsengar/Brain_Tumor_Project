@@ -1,16 +1,12 @@
 from flask import Flask, render_template, request, redirect
 import numpy as np
 import cv2
-import pickle
-import tensorflow as tf
+import dill
 
 app = Flask(__name__)
 
-"""MODEL_FILE_ID = '18bCuM7lYM4fpD4R10RSPI_s3jKpT6md2'
-MODEL_FILE_NAME = 'my_model.keras'"""
-
 with open('example_model.pkl', 'rb') as file:
-    model = pickle.load(file)
+    model = dill.load(file)
 
 @app.route('/')
 def index():
@@ -48,6 +44,5 @@ def predict():
     class_labels = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
     predicted_label = class_labels[predicted_class]
     return render_template('result.html',status=status,label=predicted_label)
-
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(host='0.0.0.0', port=5000, debug=True)
