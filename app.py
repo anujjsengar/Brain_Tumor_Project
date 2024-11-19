@@ -6,7 +6,7 @@ import dill
 app = Flask(__name__)
 
 with open('example_model.pkl', 'rb') as file:
-    model = dill.load(file)
+    app.config["MODEL"] = pickle.load(f)
 
 @app.route('/')
 def index():
@@ -14,6 +14,7 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    model = app.config["MODEL"]
     if 'image' not in request.files:
         return redirect(request.url)
     
