@@ -5,7 +5,7 @@ import pickle
 app = Flask(__name__)
 api = Blueprint("api", __name__)
 with open('example_model.pkl', 'rb') as file:
-    app.config["MODEL"] = pickle.load(f)
+    app.config["MODEL"] = pickle.load(file)
 
 @app.route('/')
 def index():
