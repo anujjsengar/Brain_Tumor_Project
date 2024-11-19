@@ -1,6 +1,7 @@
 Flask
 numpy
 opencv-python
+tensorflow
 dill
 Werkzeug
 gunicorn
