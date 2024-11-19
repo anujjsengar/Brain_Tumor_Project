@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect,Blueprint
 import numpy as np
 import cv2
-
+import pickle
 app = Flask(__name__)
 api = Blueprint("api", __name__)
 with open('example_model.pkl', 'rb') as file:
