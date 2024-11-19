@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,Blueprint
 import numpy as np
 import cv2
-import dill
 
 app = Flask(__name__)
-
+api = Blueprint("api", __name__)
 with open('example_model.pkl', 'rb') as file:
     app.config["MODEL"] = pickle.load(f)
 
@@ -45,5 +44,6 @@ def predict():
     class_labels = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
     predicted_label = class_labels[predicted_class]
     return render_template('result.html',status=status,label=predicted_label)
+app.register_blueprint(api)
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
