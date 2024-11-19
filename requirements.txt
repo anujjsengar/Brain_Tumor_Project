@@ -2,5 +2,6 @@ Flask
 numpy
 opencv-python
 tensorflow
+pickle
 Werkzeug
 gunicorn
