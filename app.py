@@ -6,13 +6,15 @@ app = Flask(__name__)
 api = Blueprint("api", __name__)
 with open('example_model.pkl', 'rb') as file:
     app.config["MODEL"] = pickle.load(file)
-
+    
 @app.route('/')
 def index():
+    print("Rendering index.html")
     return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    print("Predicting.....")
     model = app.config["MODEL"]
     if 'image' not in request.files:
         return redirect(request.url)
@@ -28,6 +30,7 @@ def predict():
     
     # Check if the image was loaded correctly
     if image is None:
+        print("Error in Image Loading")
         return "Error loading image", 400
 
     image = cv2.resize(image, (150, 150)) 
@@ -43,6 +46,8 @@ def predict():
     # Define your class labels
     class_labels = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
     predicted_label = class_labels[predicted_class]
+    print(status)
+    print(predicted_label)
     return render_template('result.html',status=status,label=predicted_label)
 app.register_blueprint(api)
 if __name__ == "__main__":
